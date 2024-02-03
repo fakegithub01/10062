@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style3.css">
+</head>
+<body>
+    <nav class="first">
+        <img src="scalerimg.jpg" alt="" id="imgone">
+        <img src="scalersocial.jpg" alt="" id="imgtwo">
+    </nav>
+    <div class="main">
+        <div class="one">
+            <div class="mainone">
+                <nav>
+                    <h1>Post your thoughts here</h1>
+                </nav>
+                <div class="maina">
+                    <div class="mainaa">
+                        <div class="container">
+                            <textarea id="textArea" rows="5" cols="50"></textarea>
+                            <button onclick="postText()">Post</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two">
+            <div class="maintwo" id="posts"></div>
+        </div>
+    </div>
+    <script>
+        var postId = 0;
+        function postText() {
+            var text = document.getElementById('textArea').value;
+            var posts = document.getElementById('posts');
+            var div = document.createElement('div');
+            div.className = 'post';
+            div.id = 'post' + postId;
+            div.innerHTML = '<p>' + text + '</p>' +
+                '<button onclick="likePost(' + postId + ')">Like</button>' +
+                '<span id="likes' + postId + '">0</span> likes' +
+                '<button onclick="removePost(' + postId + ')">Remove</button>';
+            posts.appendChild(div);
+            document.getElementById('textArea').value = '';
+            postId++;
+        }
+        function likePost(id) {
+            var likes = document.getElementById('likes' + id);
+            likes.textContent = parseInt(likes.textContent) + 1 + ' likes';
+        }
+        function removePost(id) {
+            var post = document.getElementById('post' + id);
+            post.parentNode.removeChild(post);
+        }
+    </script>
+</body>
+</html>
